@@ -1,547 +1,983 @@
 <!DOCTYPE html>
-<html >
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-      <text x="50" y="70" font-size="80" font-family="Arial, Helvetica, sans-serif" fill="white" text-anchor="middle" font-weight="700">M</text>
-    </svg>'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EXT</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Karim &amp; Layla | Wedding Invitation</title>
 <style>
-  :root {
-    --bg: #0d0f14;
-    --card: #161a23;
-    --card2: #1c2130;
-    --border: #2a3045;
-    --accent: #4f8ef7;
-    --accent2: #6ee7b7;
-    --danger: #f87171;
-    --text: #e2e8f0;
-    --muted: #64748b;
-    --glow: 0 0 24px rgba(79,142,247,0.18);
+  :root{
+    --cream:#f8f2ea;
+    --cream-2:#f0e8d9;
+    --navy:#1f3a5c;
+    --navy-2:#152944;
+    --gold:#b8934f;
+    --gold-light:#d9c294;
+    --blue-floral:#a9c1d6;
+    --ink:#2b2b2b;
+    --line:#dccfa8;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Cairo', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 24px 16px 48px;
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    overflow-x:hidden;
   }
-  .header {
-    width: 100%; max-width: 640px;
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 28px;
+  body{
+    max-width:480px;
+    margin:0 auto;
+    background:
+      radial-gradient(ellipse at 10% 8%, rgba(140,170,210,0.18), transparent 40%),
+      radial-gradient(ellipse at 90% 20%, rgba(140,170,210,0.15), transparent 45%),
+      radial-gradient(ellipse at 15% 70%, rgba(140,170,210,0.15), transparent 40%),
+      radial-gradient(ellipse at 90% 85%, rgba(140,170,210,0.18), transparent 45%),
+      var(--cream);
+    position:relative;
   }
-  .logo {
-    font-size: 1.5rem; font-weight: 900;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  .section{
+    padding:48px 28px;
+    position:relative;
   }
-  .tab-row { display: flex; gap: 8px; }
-  .tab-btn {
-    padding: 6px 16px; border-radius: 8px;
-    border: 1px solid var(--border); background: transparent;
-    color: var(--muted); font-family: 'Cairo', sans-serif;
-    font-size: .85rem; cursor: pointer; transition: all .2s;
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin:0 auto 28px;
+    width:100%;
   }
-  .tab-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; }
-  .card {
-    width: 100%; max-width: 640px;
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 16px; padding: 28px;
-    box-shadow: var(--glow);
+  .divider svg{ width:120px; height:14px; }
+  .divider .dot{
+    width:6px; height:6px; border-radius:50%; background:var(--gold);
   }
-  .card-title {
-    font-size: 1.05rem; font-weight: 700; margin-bottom: 18px;
-    display: flex; align-items: center; gap: 8px;
+  .eyebrow{
+    text-align:center;
+    letter-spacing:2px;
+    color:var(--navy);
+    font-size:13px;
+    text-transform:uppercase;
   }
-  .input-group { display: flex; gap: 10px; margin-bottom: 10px; }
-  input[type="text"], input[type="password"], input[type="number"] {
-    flex: 1; padding: 12px 16px;
-    background: var(--card2); border: 1px solid var(--border);
-    border-radius: 10px; color: var(--text);
-    font-family: 'Cairo', sans-serif; font-size: 1rem;
-    outline: none; transition: border-color .2s;
-    direction: ltr; text-align: center;
-  }
-  input:focus { border-color: var(--accent); }
-  input::placeholder { color: var(--muted); direction: rtl; text-align: right; }
-  .btn {
-    padding: 12px 22px; border-radius: 10px; border: none;
-    font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 700;
-    cursor: pointer; transition: all .2s; white-space: nowrap;
-  }
-  .btn-primary { background: var(--accent); color: #fff; }
-  .btn-primary:hover { background: #3a7be8; transform: translateY(-1px); }
-  .btn-danger {
-    background: #7f1d1d; color: var(--danger);
-    border: 1px solid #991b1b; font-size: .85rem; padding: 8px 14px;
-  }
-  .result-box {
-    margin-top: 20px; padding: 20px;
-    background: var(--card2); border: 1px solid var(--border);
-    border-radius: 12px; display: none;
-    animation: fadeIn .3s ease;
-  }
-  .result-box.show { display: block; }
-  @keyframes fadeIn {
-    from { opacity:0; transform:translateY(8px); }
-    to   { opacity:1; transform:translateY(0); }
-  }
-  .res-login { font-size: .8rem; color: var(--muted); margin-bottom: 4px; }
-  .res-name { font-size: 1.15rem; font-weight: 700; color: var(--accent2); margin-bottom: 16px; }
-  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .info-item {
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: 10px; padding: 12px 14px;
-  }
-  .info-label { font-size: .72rem; color: var(--muted); margin-bottom: 4px; }
-  .info-value { font-size: 1rem; font-weight: 700; direction: ltr; text-align: left; }
-  .info-value.ext { color: var(--accent); font-size: 1.25rem; }
-  .info-value.shift { color: #fbbf24; }
-  .sep { height: 1px; background: var(--border); margin: 16px 0; }
-  .pass-single {
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: 8px; padding: 14px 18px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .pass-single .lbl { color: var(--muted); font-size: .78rem; }
-  .pass-single .val { font-family: monospace; font-size: 1.2rem; color: var(--accent2); letter-spacing: 2px; }
-  .alert {
-    padding: 11px 14px; border-radius: 10px; font-size: .88rem;
-    margin-top: 10px; display: none;
-  }
-  .alert.show { display: block; animation: fadeIn .2s ease; }
-  .alert-error  { background: rgba(248,113,113,.1); border:1px solid var(--danger); color: var(--danger); }
-  .alert-success{ background: rgba(110,231,183,.1); border:1px solid var(--accent2); color: var(--accent2); }
-  .upload-zone {
-    border: 2px dashed var(--border); border-radius: 12px;
-    padding: 28px; text-align: center; cursor: pointer;
-    transition: all .2s; margin-bottom: 14px;
-  }
-  .upload-zone:hover { border-color: var(--accent); background: rgba(79,142,247,.05); }
-  .upload-icon { font-size: 2.2rem; margin-bottom: 6px; }
-  .upload-text { color: var(--muted); font-size: .88rem; }
-  #fileInput { display: none; }
-  .stat-row { display: flex; gap: 10px; margin-top: 12px; }
-  .stat-box { flex:1; background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:12px; text-align:center; }
-  .stat-num { font-size:1.5rem; font-weight:900; color:var(--accent); }
-  .stat-lbl { font-size:.72rem; color:var(--muted); margin-top:2px; }
-  .section { display:none; }
-  .section.active { display:block; }
-  .lock-box { text-align:center; padding:12px 0 20px; }
-  .lock-icon { font-size:2.2rem; margin-bottom:6px; }
-  .lock-msg { color:var(--muted); font-size:.88rem; margin-bottom:16px; }
-  @media(max-width:500px){
-    .info-grid{grid-template-columns:1fr;}
-    .stat-row{flex-direction:column;}
-  }
-   #mazola {
-            position: fixed;
-            bottom: 10px;
-            left: 20px;
-            width: 200px;
-            text-align: center;
-            background: linear-gradient(45deg, #6f0779, #000000);
-            color: #fff;
-            font-weight: bold;
-            font-size: 20px;
-            padding: 8px 12px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 9999;
-            font-family: "Cairo", Arial, sans-serif;
-            pointer-events: none;
-            animation: pulse 2s infinite;
-        }
 
-        @keyframes pulse {
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:56px 24px 40px;
+    text-align:center;
+  }
+  .frame-wrap{
+    position:relative;
+    padding:34px 18px;
+  }
+  .frame-svg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+  }
+  .frame-inner{
+    position:relative;
+    z-index:2;
+    padding:70px 10px 60px;
+  }
+  .hero .amp{
+    font-style:italic;
+    color:var(--gold);
+    font-size:22px;
+    margin:6px 0;
+    display:block;
+  }
+  .hero h1{
+    font-size:38px;
+    color:var(--navy);
+    letter-spacing:1px;
+    line-height:1.25;
+    font-weight:400;
+  }
+  .hero .sub{
+    margin-top:18px;
+    font-size:13px;
+    letter-spacing:3px;
+    color:#7a6a4a;
+    text-transform:uppercase;
+  }
 
-            0%,
-            100% {
-                transform: scale(1);
-            }
+  /* ---------- CEREMONY / NAMES ---------- */
+  .announce{
+    text-align:center;
+  }
+  .announce h2{
+    color:var(--navy);
+    font-size:22px;
+    letter-spacing:2px;
+    margin-bottom:14px;
+  }
+  .announce p{
+    color:#5a5546;
+    font-size:15px;
+    line-height:1.7;
+  }
 
-            50% {
-                transform: scale(1.1);
-            }
-        }
+  .couple-block{
+    text-align:center;
+    padding:20px 28px 8px;
+  }
+  .couple-block .name{
+    font-size:34px;
+    color:var(--navy);
+    margin:6px 0;
+  }
+  .couple-block .role{
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:#8a7e5f;
+  }
+  .couple-block .amp{
+    font-style:italic;
+    color:var(--gold);
+    font-size:24px;
+    display:block;
+    margin:10px 0;
+  }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-title{
+    text-align:center;
+    color:var(--navy);
+    font-size:20px;
+    letter-spacing:2px;
+    margin-bottom:20px;
+  }
+  .gallery{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:8px;
+  }
+  .gallery .big{ grid-row: span 2; }
+  .ph{
+    border-radius:2px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:28px;
+    min-height:110px;
+  }
+  .ph1{ background:linear-gradient(160deg,#3a3a38,#8a8578); min-height:236px;}
+  .ph2{ background:linear-gradient(160deg,#4a4844,#a39d8e); }
+  .ph3{ background:linear-gradient(160deg,#565248,#b0a996); }
+
+  /* ---------- RECEPTION INFO ---------- */
+  .info-title{
+    text-align:center;
+    color:var(--navy);
+    font-size:20px;
+    letter-spacing:2px;
+    margin-bottom:10px;
+  }
+  .info-desc{
+    text-align:center;
+    color:#5a5546;
+    font-size:14px;
+    margin-bottom:18px;
+  }
+  .time-big{
+    text-align:center;
+    font-size:30px;
+    color:var(--navy);
+    margin-bottom:14px;
+  }
+  .date-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    font-size:14px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#5a5546;
+  }
+  .date-row b{
+    font-size:26px;
+    color:var(--navy);
+    letter-spacing:0;
+    text-transform:none;
+    font-family: 'Georgia', serif;
+  }
+  .date-row .sep{ color:var(--gold); }
+
+  .welcome-reception{
+    display:flex;
+    justify-content:space-around;
+    text-align:center;
+    margin:32px 0;
+  }
+  .welcome-reception div p:first-child{
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#8a7e5f;
+    margin-bottom:6px;
+  }
+  .welcome-reception div p:last-child{
+    font-size:20px;
+    color:var(--navy);
+  }
+
+  /* ---------- COUNTDOWN ---------- */
+  .countdown-title{
+    text-align:center;
+    color:var(--navy);
+    letter-spacing:2px;
+    font-size:18px;
+    margin-bottom:14px;
+  }
+  .countdown-line{
+    text-align:center;
+    font-size:16px;
+    color:#4a4536;
+    margin-bottom:36px;
+  }
+  .countdown-line span{
+    color:var(--navy);
+    font-weight:bold;
+  }
+
+  /* ---------- CALENDAR ---------- */
+  .cal-card{
+    border:1px solid var(--gold);
+    padding:26px 16px 24px;
+    background:rgba(255,255,255,0.35);
+    position:relative;
+    overflow:visible;
+  }
+  .cal-corner{
+    position:absolute;
+    width:46px; height:46px;
+    z-index:2;
+  }
+  .cal-corner.tl{ top:-1px; left:-1px; }
+  .cal-corner.tr{ top:-1px; right:-1px; transform:scaleX(-1); }
+  .cal-corner.bl{ bottom:-1px; left:-1px; transform:scaleY(-1); }
+  .cal-corner.br{ bottom:-1px; right:-1px; transform:scale(-1,-1); }
+  .cal-title{
+    text-align:center;
+    color:var(--navy);
+    font-size:18px;
+    margin-bottom:12px;
+  }
+  table.cal{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+  }
+  table.cal th{
+    color:#8a7e5f;
+    font-weight:400;
+    font-size:11px;
+    letter-spacing:1px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--line);
+  }
+  table.cal td{
+    text-align:center;
+    padding:8px 0;
+    color:var(--ink);
+  }
+  table.cal td.marked{
+    position:relative;
+  }
+  table.cal td.marked span{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:26px; height:26px;
+    background:var(--navy);
+    color:#fff;
+    border-radius:50%;
+    font-size:12px;
+  }
+  .add-cal{
+    display:block;
+    text-align:center;
+    margin-top:18px;
+    color:var(--navy);
+    text-decoration:underline;
+    font-size:14px;
+    cursor:pointer;
+  }
+
+  .rsvp-btn{
+    display:block;
+    width:100%;
+    background:var(--navy);
+    color:#fff;
+    text-align:center;
+    padding:16px;
+    margin-top:26px;
+    border:none;
+    border-radius:4px;
+    font-family:inherit;
+    font-size:14px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    cursor:pointer;
+  }
+  .rsvp-btn:active{ opacity:0.85; }
+
+  /* ---------- VENUE ---------- */
+  .venue-title{
+    text-align:center;
+    color:var(--navy);
+    font-size:20px;
+    letter-spacing:1px;
+    margin-bottom:8px;
+  }
+  .venue-addr{
+    text-align:center;
+    font-size:12px;
+    color:#8a7e5f;
+    margin-bottom:16px;
+    word-break:break-word;
+  }
+  .map-box{
+    height:180px;
+    border-radius:6px;
+    background:
+      linear-gradient(0deg, rgba(30,58,95,0.15), rgba(30,58,95,0.15)),
+      repeating-linear-gradient(45deg, #cfe0e8 0 10px, #dcebf1 10px 20px);
+    position:relative;
+    display:flex;
+    align-items:flex-end;
+    justify-content:flex-start;
+  }
+  .map-btn{
+    margin:12px;
+    background:#fff;
+    color:var(--navy);
+    font-size:13px;
+    padding:8px 14px;
+    border-radius:4px;
+    text-decoration:none;
+    box-shadow:0 1px 4px rgba(0,0,0,0.2);
+  }
+  .map-pin{
+    position:absolute; top:44%; left:48%;
+    font-size:26px;
+    color:var(--navy);
+  }
+
+  /* ---------- DRESS CODE ---------- */
+  .dress-title{
+    text-align:center;
+    color:var(--navy);
+    font-size:20px;
+    margin-bottom:6px;
+  }
+  .dress-sub{
+    text-align:center;
+    color:#5a5546;
+    font-size:14px;
+    margin-bottom:18px;
+  }
+  .swatches{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+  }
+  .swatch{
+    width:44px; height:44px;
+    border-radius:50%;
+    border:1px solid rgba(0,0,0,0.08);
+  }
+
+  /* ---------- SCHEDULE ---------- */
+  .sched-title{
+    text-align:center;
+    color:var(--navy);
+    font-size:20px;
+    letter-spacing:1px;
+    margin-bottom:26px;
+  }
+  .timeline{
+    position:relative;
+    padding-left:0;
+  }
+  .tl-row{
+    display:grid;
+    grid-template-columns: 60px 20px 1fr;
+    align-items:center;
+    min-height:52px;
+  }
+  .tl-row .time{
+    text-align:right;
+    color:var(--navy);
+    font-size:15px;
+    padding-right:10px;
+  }
+  .tl-row .node-col{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    height:100%;
+  }
+  .tl-row .node-col::before{
+    content:"";
+    position:absolute;
+    top:0; bottom:0;
+    width:1px;
+    background:var(--line);
+  }
+  .tl-row:first-child .node-col::before{ top:50%; }
+  .tl-row:last-child .node-col::before{ bottom:50%; }
+  .tl-row .node{
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--navy);
+    z-index:1;
+  }
+  .tl-row .label{
+    padding-left:14px;
+    font-size:15px;
+    color:var(--ink);
+  }
+
+  /* ---------- GUESTBOOK ---------- */
+  .gb-title{
+    text-align:center;
+    color:var(--navy);
+    font-size:20px;
+    margin-bottom:20px;
+  }
+  .gb-field{
+    width:100%;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,0.5);
+    border-radius:6px;
+    padding:14px;
+    font-family:inherit;
+    font-size:14px;
+    margin-bottom:14px;
+    color:var(--ink);
+  }
+  textarea.gb-field{ min-height:100px; resize:vertical; }
+  .gb-send{
+    width:100%;
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    padding:15px;
+    border-radius:4px;
+    font-family:inherit;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .wishes-list{
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .wish{
+    background:rgba(255,255,255,0.5);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:12px 14px;
+    font-size:13px;
+  }
+  .wish b{ color:var(--navy); }
+
+  footer{
+    text-align:center;
+    padding:30px 20px 50px;
+    color:#a99a72;
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+
+  /* ---------- COVER SCREEN ---------- */
+  #main-content{ display:none; }
+  #cover-screen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(ellipse at 20% 15%, rgba(140,170,210,0.2), transparent 45%),
+      radial-gradient(ellipse at 85% 85%, rgba(140,170,210,0.2), transparent 45%),
+      var(--cream);
+    padding:30px;
+  }
+  .cover-frame{
+    position:relative;
+    width:100%;
+    max-width:320px;
+    padding:40px 20px;
+  }
+  .cover-svg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+  }
+  .cover-text{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:34px 6px;
+  }
+  .cover-eyebrow{
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:#8a7e5f;
+    margin-bottom:10px;
+  }
+  .cover-names{
+    font-size:32px;
+    color:var(--navy);
+  }
+  .cover-names .amp{
+    font-style:italic;
+    color:var(--gold);
+    font-size:20px;
+    margin:0 8px;
+  }
+  .cover-date{
+    margin-top:10px;
+    font-size:13px;
+    letter-spacing:2px;
+    color:#7a6a4a;
+  }
+  #open-btn{
+    margin-top:30px;
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    padding:14px 30px;
+    font-family:inherit;
+    font-size:13px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    border-radius:2px;
+    cursor:pointer;
+  }
+  #open-btn:active{ opacity:0.85; }
+
+  #music-toggle{
+    position:fixed;
+    top:16px;
+    right:16px;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    font-size:16px;
+    z-index:50;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+  }
+  #music-toggle.show{ display:flex; }
+  #music-toggle.paused{ opacity:0.5; }
 </style>
 </head>
 <body>
-    <div id="mazola">Mazola 😎🎶</div>
 
-<div class="header">
-  <div class="logo">📋 Ext</div>
-  <div class="tab-row">
-    <button class="tab-btn active" onclick="switchTab('user')">Employee</button>
-    <button class="tab-btn" onclick="switchTab('admin')">Admin</button>
-  </div>
-</div>
+  <!-- MUSIC: put your chosen song file next to this HTML file and name it song.mp3
+       (or change the src below to match your file's name). -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
 
-<!-- USER -->
-<div class="card section active" id="userSection">
-  <div class="card-title">🔍 Search Login</div>
-  <div class="input-group">
-    <button class="btn btn-primary" onclick="doSearch()">Search</button>
-    <input type="number" id="loginInput" placeholder="Enter Login" onkeydown="if(event.key==='Enter')doSearch()">
-  </div>
-  <div class="alert alert-error" id="userErr"></div>
-  <div class="result-box" id="resBox">
-    <div class="res-login" id="resLoginLbl"></div>
-    <div class="res-name" id="resName">—</div>
-    <div class="info-grid">
-      <div class="info-item">
-        <div class="info-label">Start shift</div>
-        <div class="info-value shift" id="resFrom">—</div>
-      </div>
-      <div class="info-item" id="siteItem" style="display:none">
-        <div class="info-label">Site</div>
-        <div class="info-value" style="color:#c084fc" id="resSite">—</div>
-      </div>
-      <div class="info-item" id="accountItem" style="display:none">
-        <div class="info-label">Account Name</div>
-        <div class="info-value" style="color:#fbbf24" id="resAccount">—</div>
-      </div>
-      <div class="info-item" id="agentItem" style="display:none">
-      </div>
-      <div class="info-item" style="grid-column:1/-1">
-        <div class="info-label">EXT</div>
-        <div class="info-value ext" id="resExt">—</div>
+  <!-- COVER / OPEN SCREEN -->
+  <div id="cover-screen">
+    <div class="cover-frame">
+      <svg viewBox="0 0 220 260" class="cover-svg">
+        <path d="M110 6 C150 6 158 28 158 28 C185 32 214 55 214 105
+                 C214 150 190 165 190 165 L190 195
+                 C190 195 214 210 214 250
+                 C192 254 150 254 110 254
+                 C70 254 28 254 6 250
+                 C6 210 30 195 30 195 L30 165
+                 C30 165 6 150 6 105
+                 C6 55 35 32 62 28 C62 28 70 6 110 6 Z"
+              fill="none" stroke="#b8934f" stroke-width="2.5"/>
+        <circle cx="110" cy="10" r="4" fill="#e6cd94"/>
+        <circle cx="110" cy="250" r="4" fill="#e6cd94"/>
+      </svg>
+      <div class="cover-text">
+        <div class="cover-eyebrow">The Wedding Of</div>
+        <div class="cover-names">Karim<span class="amp">&amp;</span>Layla</div>
+        <div class="cover-date">31 · 12 · 2026</div>
+        <button id="open-btn">Open Invitation</button>
       </div>
     </div>
-    <div class="sep"></div>
-    <div class="card-title" style="font-size:.9rem;margin-bottom:10px;">🔑 Password</div>
-    <div id="resPasses"></div>
-  </div>
-</div>
-
-<!-- ADMIN -->
-<div class="card section" id="adminSection">
-  <div id="adminGate">
-    <div class="lock-box">
-      <div class="lock-icon">🔐</div>
-      <div class="lock-msg">Login is restricted to admins only</div>
-    </div>
-    <div class="input-group">
-      <button class="btn btn-primary" onclick="adminLogin()">Login</button>
-      <input type="password" id="adminPw" placeholder="Admin Password" onkeydown="if(event.key==='Enter')adminLogin()">
-    </div>
-    <div class="alert alert-error" id="adminErr"></div>
   </div>
 
-  <div id="adminPanel" style="display:none">
-    <div class="card-title">
-      📤 Select File Extension
-      <button class="btn btn-danger" style="margin-right:auto" onclick="adminOut()">Logout</button>
-    </div>
+  <!-- MUSIC TOGGLE (shown after opening) -->
+  <button id="music-toggle" title="Play / Pause music">♪</button>
 
-    <div style="margin-bottom: 20px;">
-      <h3 style="color: var(--accent); margin-bottom: 10px;">NN</h3>
-      <div class="upload-zone" onclick="document.getElementById('fileInputNN').click()">
-        <div class="upload-icon">📂</div>
-        <div class="upload-text">Click or drag a .xlsb / .xlsx file for ىNON here</div>
+  <div id="main-content">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="frame-wrap">
+      <svg class="frame-svg" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#e6cd94"/>
+            <stop offset="0.5" stop-color="#b8934f"/>
+            <stop offset="1" stop-color="#8f6f38"/>
+          </linearGradient>
+        </defs>
+        <!-- outer cartouche -->
+        <path d="M150 8
+                 C 205 8 215 40 215 40
+                 C 250 45 292 75 292 140
+                 C 292 200 260 220 260 220
+                 L 260 260
+                 C 260 260 292 280 292 340
+                 C 264 388 205 392 150 392
+                 C 95 392 36 388 8 340
+                 C 8 280 40 260 40 260
+                 L 40 220
+                 C 40 220 8 200 8 140
+                 C 8 75 50 45 85 40
+                 C 85 40 95 8 150 8 Z"
+              fill="none" stroke="url(#goldGrad)" stroke-width="3"/>
+        <path d="M150 18
+                 C 198 18 206 46 206 46
+                 C 240 51 282 78 282 140
+                 C 282 195 253 213 253 213
+                 L 253 267
+                 C 253 267 282 285 282 338
+                 C 257 380 202 382 150 382
+                 C 98 382 43 380 18 338
+                 C 18 285 47 267 47 267
+                 L 47 213
+                 C 47 213 18 195 18 140
+                 C 18 78 60 51 94 46
+                 C 94 46 102 18 150 18 Z"
+              fill="none" stroke="#1f3a5c" stroke-width="1.2"/>
+        <!-- top cusp navy accent -->
+        <path d="M126 18 C 132 4 168 4 174 18 C 168 30 132 30 126 18 Z" fill="#1f3a5c"/>
+        <circle cx="150" cy="16" r="5" fill="#e6cd94"/>
+        <!-- bottom cusp navy accent -->
+        <path d="M126 382 C 132 396 168 396 174 382 C 168 370 132 370 126 382 Z" fill="#1f3a5c"/>
+        <circle cx="150" cy="384" r="5" fill="#e6cd94"/>
+        <!-- side flower clusters (original stylised florals, not a copy) -->
+        <g opacity="0.95">
+          <g transform="translate(4,95)">
+            <circle r="10" fill="#c7d8e8" stroke="#7ea0c2" stroke-width="1"/>
+            <circle cx="14" cy="8" r="7" fill="#eef0e6" stroke="#c9b98a" stroke-width="1"/>
+            <circle cx="-4" cy="16" r="6" fill="#9db9d6" stroke="#5f80a6" stroke-width="1"/>
+          </g>
+          <g transform="translate(296,95) scale(-1,1)">
+            <circle r="10" fill="#c7d8e8" stroke="#7ea0c2" stroke-width="1"/>
+            <circle cx="14" cy="8" r="7" fill="#eef0e6" stroke="#c9b98a" stroke-width="1"/>
+            <circle cx="-4" cy="16" r="6" fill="#9db9d6" stroke="#5f80a6" stroke-width="1"/>
+          </g>
+          <g transform="translate(4,305) scale(1,-1)">
+            <circle r="10" fill="#c7d8e8" stroke="#7ea0c2" stroke-width="1"/>
+            <circle cx="14" cy="8" r="7" fill="#eef0e6" stroke="#c9b98a" stroke-width="1"/>
+            <circle cx="-4" cy="16" r="6" fill="#9db9d6" stroke="#5f80a6" stroke-width="1"/>
+          </g>
+          <g transform="translate(296,305) scale(-1,-1)">
+            <circle r="10" fill="#c7d8e8" stroke="#7ea0c2" stroke-width="1"/>
+            <circle cx="14" cy="8" r="7" fill="#eef0e6" stroke="#c9b98a" stroke-width="1"/>
+            <circle cx="-4" cy="16" r="6" fill="#9db9d6" stroke="#5f80a6" stroke-width="1"/>
+          </g>
+        </g>
+      </svg>
+      <div class="frame-inner">
+        <div class="eyebrow">You are cordially invited</div>
+        <h1>Karim<span class="amp">&amp;</span>Layla</h1>
+        <div class="sub">31 · 12 · 2026</div>
       </div>
-      <input type="file" id="fileInputNN" accept=".xlsb,.xlsx,.xls" onchange="handleFile(this.files[0], 'nn')">
-    </div>
-
-    <div style="margin-bottom: 20px;">
-      <h3 style="color: var(--accent); margin-bottom: 10px;">Tech</h3>
-      <div class="upload-zone" onclick="document.getElementById('fileInputTech').click()">
-        <div class="upload-icon">📂</div>
-        <div class="upload-text">Click or drag a .xlsb / .xlsx file for Tech here</div>
-      </div>
-      <input type="file" id="fileInputTech" accept=".xlsb,.xlsx,.xls" onchange="handleFile(this.files[0], 'tech')">
-    </div>
-
-    <div id="progress" style="display:none;color:var(--muted);font-size:.88rem;margin-bottom:8px;">⏳ Loading...</div>
-    <div class="alert alert-success" id="upOk"></div>
-    <div class="alert alert-error"   id="upErr"></div>
-
-    <div class="stat-row" id="statRow" style="display:none">
-      <div class="stat-box"><div class="stat-num" id="statCountNN">0</div><div class="stat-lbl">NON Employee</div></div>
-      <div class="stat-box"><div class="stat-num" id="statCountTech">0</div><div class="stat-lbl">Tech Employee</div></div>
-    </div>
-    <div style="display:flex; gap:10px; margin-top:16px;">
-      <button class="btn btn-danger" onclick="deleteData('nn')">Delete Non</button>
-      <button class="btn btn-danger" onclick="deleteData('tech')">Delete Tech</button>
     </div>
   </div>
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+  <!-- CEREMONY INFO -->
+  <div class="section announce">
+    <div class="eyebrow" style="margin-bottom:14px;">Ceremony Info</div>
+    <h2>We joyfully announce<br>the wedding of our children</h2>
+    <p>Please join us as we celebrate the beginning of a lifetime of love, laughter, and togetherness.</p>
+  </div>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAxgOiXWzzQx5VlkEZklrLDpsu6Pf4jgpU",
-  authDomain: "education-e65d7.firebaseapp.com",
-  databaseURL: "https://education-e65d7-default-rtdb.firebaseio.com",
-  projectId: "education-e65d7",
-  storageBucket: "education-e65d7.firebasestorage.app",
-  messagingSenderId: "1071767617322",
-  appId: "1:1071767617322:web:2dcb4576ba55d31d0ba853",
-  measurementId: "G-KBF76EG2K7"
-};
+  <div class="couple-block">
+    <p class="name">Karim</p>
+    <p class="role">Groom</p>
+    <span class="amp">&amp;</span>
+    <p class="name">Layla</p>
+    <p class="role">Bride</p>
+  </div>
 
-const app = initializeApp(firebaseConfig);
-const firebaseDb = getDatabase(app);
+  <div class="divider">
+    <svg viewBox="0 0 220 30" width="220" height="30">
+      <line x1="0" y1="15" x2="85" y2="15" stroke="#b8934f" stroke-width="1"/>
+      <line x1="135" y1="15" x2="220" y2="15" stroke="#b8934f" stroke-width="1"/>
+      <g transform="translate(110,15)">
+        <circle r="9" fill="#f4efe4" stroke="#c9b98a" stroke-width="1"/>
+        <circle cx="-12" cy="2" r="5" fill="#a9c1d6" stroke="#7ea0c2" stroke-width="0.8"/>
+        <circle cx="12" cy="2" r="5" fill="#a9c1d6" stroke="#7ea0c2" stroke-width="0.8"/>
+        <circle r="3" fill="#b8934f"/>
+      </g>
+    </svg>
+  </div>
 
-const ADMIN_PW = 'mazola123';
-let db_nn = {};
-let db_tech = {};
+  <!-- GALLERY -->
+  <div class="section" style="padding-top:0;">
+    <div class="gallery-title">Photo Gallery</div>
+    <div class="gallery">
+      <div class="ph ph1 big">✿</div>
+      <div class="ph ph2">✿</div>
+      <div class="ph ph3">✿</div>
+    </div>
+  </div>
 
-// Base DB with known names - used for name lookup on plain IDs
-const db = {"635997":{"n":null,"f":"09:15 ص","t":null,"e":"65333","p":["36533","new EXT","123456"]},"636028":{"n":null,"f":"09:15 ص","t":null,"e":"651368","p":["123456"]},"636571":{"n":null,"f":"09:15 ص","t":null,"e":"652378","p":["652378","123456","0x2a"]},"636424":{"n":null,"f":"09:15 ص","t":null,"e":"652458","p":["123456","652458","754256"]},"636305":{"n":null,"f":"09:15 ص","t":null,"e":"652991","p":["123456","652991","99256"]},"636453":{"n":null,"f":"09:15 ص","t":null,"e":"653082","p":["123456","653082","180356"]},"636118":{"n":null,"f":"09:15 ص","t":null,"e":"630360","p":["123456"]},"636389":{"n":null,"f":"09:15 ص","t":null,"e":"651584","p":["123456"]},"636353":{"n":null,"f":"09:15 ص","t":null,"e":"651561","p":["123456"]},"636517":{"n":null,"f":"09:15 ص","t":null,"e":"652335","p":["123456"]},"636526":{"n":null,"f":"09:15 ص","t":null,"e":"653017","p":["123456","653017","610356"]},"636714":{"n":null,"f":"09:15 ص","t":null,"e":"633440","p":["306344"]},"636810":{"n":null,"f":"09:15 ص","t":null,"e":"652824","p":["123456","0x2a"]},"613702":{"n":null,"f":"07:00 ص","t":null,"e":"654035","p":["123456"]},"617533":{"n":null,"f":"07:00 ص","t":null,"e":"656829","p":["829656","N"]},"601863":{"n":null,"f":"07:00 ص","t":null,"e":"651533","p":["123456"]},"602929":{"n":null,"f":"07:00 ص","t":null,"e":"654695","p":["956546"]},"635971":{"n":null,"f":"07:00 ص","t":null,"e":"653005","p":["123456","653005","400356"]},"637302":{"n":null,"f":"07:00 ص","t":null,"e":"652418","p":["123456","652418","714256"]},"617602":{"n":null,"f":"07:00 ص","t":null,"e":"652869","p":["123456","652869","868256"]},"608062":{"n":null,"f":"07:00 ص","t":null,"e":"652744","p":["123456","652744","347256"]},"635696":{"n":"Esra Ahmed Abd Elmoneam Mohamed","f":"07:00 ص","t":null,"e":"652964","p":["123456","652964","369256"]},"617526":{"n":"Aya Ramadan Amer Mohamed","f":"07:00 ص","t":null,"e":"65353","p":["36553","new EXT","123456"]},"619215":{"n":"Yasmeen Salah Abdelhai Abdelrahman","f":"07:00 ص","t":null,"e":"652620","p":["123456","652620","916256"]},"617507":{"n":"Sahar Hesham Hosny Shahin","f":"07:00 ص","t":null,"e":"652192","p":["123456","652192","191256"]},"634137":{"n":"Mona Sayed Saad Baioumy","f":"07:00 ص","t":null,"e":"652429","p":["123456","652429","824256"]},"614741":{"n":"Asmaa Osama Ahmed Ahmed","f":"07:00 ص","t":null,"e":"656858","p":["858656","N"]},"616028":{"n":"Kareeman Shikh Al-Arab Emam Hassan","f":"07:00 ص","t":null,"e":"84065","p":["123456"]},"648606":{"n":"Rania Mamdouh Hamed Hasnen","f":"07:00 ص","t":null,"e":"652478","p":["123456","652478","774256"]},"651392":{"n":"Shaimaa Attia Ismail Elsayed","f":"07:00 ص","t":null,"e":"84487","p":["123456","84487","84486"]},"619670":{"n":"Assala Saeed Ahmed Shahat","f":"07:00 ص","t":null,"e":"653062","p":["123456","653062","160356"]},"631892":{"n":null,"f":"07:00 ص","t":null,"e":"652074","p":["123456","652074","370256"]},"617595":{"n":"Alaa Nady Khafagy Abd Elzaher","f":"07:00 ص","t":null,"e":"652993","p":["123456","652993","299256"]},"651874":{"n":"Zianb Mohamed Abdalwahab Elsaiad","f":"07:00 ص","t":null,"e":"653022","p":["123456","653022","120356"]},"618980":{"n":"Rawan Ashraf Amin Ahmad","f":"07:00 ص","t":null,"e":"653050","p":["123456","653050","940356"]},"618962":{"n":"Yasmeen Mohamed Mahmoud Hamoda","f":"07:00 ص","t":null,"e":"652182","p":["123456","652182","181256"]},"617608":{"n":null,"f":"07:00 ص","t":null,"e":"651563","p":["123456"]},"619643":{"n":"Nada Amin Ahmed Soliman","f":"07:00 ص","t":null,"e":"652649","p":["123456","652649","846256"]},"619899":{"n":"Hind Essam Ezzat Mostafa","f":"07:00 ص","t":null,"e":"652623","p":["123456","652623","226256"]},"616033":{"n":"Alaa Esam Yousif Mohamed","f":"07:00 ص","t":null,"e":"65134","p":["13465","123456","0x2a"]},"616111":{"n":"Salma Mohammed Mohammed Abdel-Fatah Hussain","f":"07:00 ص","t":null,"e":"630388","p":["123456"]},"634742":{"n":"Hager Abdelaziz Ahmed Ibrahim","f":"07:00 ص","t":null,"e":"652612","p":["123456","652612","116256"]},"619266":{"n":"Zinab Mohamed Mahmoud Mohamed","f":"07:00 ص","t":null,"e":"653095","p":["123456","653095","490356"]},"619666":{"n":"Omnia Farag Mohamed Mostafa","f":"07:00 ص","t":null,"e":"652341","p":["123456"]},"89977":{"n":"Rana Gamal Ahmed Eldowy","f":"07:00 ص","t":null,"e":"652014","p":["123456","652014","310256"]},"88756":{"n":"Marina Monssef Youssef Shoukry","f":"07:00 ص","t":null,"e":"653129","p":["123456","653129","821356"]},"88589":{"n":"Hassnaa Ali Abdelraheem Ahmed","f":"07:00 ص","t":null,"e":"84472","p":["123456","84472","84471"]},"88633":{"n":"Hasnaa Abdel-Naeem Hassan Ahmed","f":"07:00 ص","t":null,"e":"654716","p":["166547"]},"647855":{"n":"Zharaa Ghandour Abdelqader Hassinin","f":"07:00 ص","t":null,"e":"653107","p":["123456","653107","601356"]},"619235":{"n":"Yasmine Alamir Mahmoud Mansour","f":"07:00 ص","t":null,"e":"652402","p":["123456","652402","104256"]},"648234":{"n":"Arwa Khalaf Mohamed Mohamed","f":"07:00 ص","t":null,"e":"652569","p":["123456","652569","865256"]},"633829":{"n":"Farha Abdo Abdelzaher Hassan","f":"07:00 ص","t":null,"e":"653074","p":["123456","653074","370356"]},"619967":{"n":"Yasmeen Khalaf Hilmy Gad","f":"07:00 ص","t":null,"e":"654709","p":["96547"]},"615780":{"n":"Esraa Abdelaal Mohamed Abdelaal","f":"07:00 ص","t":null,"e":"652677","p":["123456","652677","676256"]},"618747":{"n":"Alyaa Ambarak Qabeel Abd Elmonem","f":"07:00 ص","t":null,"e":"652219","p":["123456","652219","912256"]},"651981":{"n":"Doaa Hassan Mohamed Abaid","f":"07:00 ص","t":null,"e":"654066","p":["123456","654066","560456"]},"653195":{"n":"Mariam Mohamed Mahmoud Ali","f":"07:00 ص","t":null,"e":"651373","p":["123456"]},"631587":{"n":"Safaa mohamed alamir Ahmed","f":"07:00 ص","t":null,"e":"84030","p":["30840"]},"651986":{"n":"Azhar Salama Refai Mohamed","f":"07:00 ص","t":null,"e":"652568","p":["123456","652568","765256"]},"653196":{"n":"Aya Nasser Abdelrahim Shaban","f":"07:00 ص","t":null,"e":"652541","p":["123456","652541","45256"]},"619510":{"n":"Esraa Saad Mohamed Alsoghier Mohamed","f":"07:00 ص","t":null,"e":"652383","p":["652383","123456","0x2a"]},"619313":{"n":"Eman barakat Abd Elhafiz Shahat","f":"07:00 ص","t":null,"e":"650102","p":["201056","123456","0x2a"]},"653216":{"n":"Hager Alaa Eldin Fathy Khaled","f":"07:00 ص","t":null,"e":"654096","p":["123456","654096","590456"]},"653225":{"n":"Sohaila Alaa Eldin Fathy Khaled","f":"07:00 ص","t":null,"e":"653174","p":["123456","653174","371356"]},"616188":{"n":"Marwa Ali Mohamed Mohamed","f":"07:00 ص","t":null,"e":"652582","p":["123456","652582","185256"]},"619941":{"n":"Aliaa Mahmoud Hagagi Mobarak","f":"07:00 ص","t":null,"e":"652874","p":["123456","652874","378256"]},"619452":{"n":"Tasnim Adel Khairy Mostafa","f":"07:00 ص","t":null,"e":"65121","p":["12165","123456","0x2a"]},"619390":{"n":"Kermena Ayman Shawky Fahmy","f":"07:00 ص","t":null,"e":"652269","p":["123456"]},"619877":{"n":"Mennat-Allah Hussein Hemaya Hussein","f":"07:00 ص","t":null,"e":"652387","p":["652387","123456","0x2a"]},"619800":{"n":"Marwa Mohamed Abd Elmontaleb Mohamed","f":"07:00 ص","t":null,"e":"634179","p":["123456"]},"616214":{"n":"Yara Ashraf Abdelazim Mahmoud","f":"07:00 ص","t":null,"e":"87561","p":["16578","0"]},"619520":{"n":"Rana Medhat Mohmed Hassan","f":"07:00 ص","t":null,"e":"84022","p":["123456"]},"619419":{"n":"Nadia Zaki Kasim Mekhaimer","f":"07:00 ص","t":null,"e":"652352","p":["123456"]},"619539":{"n":"Alyaa Samir Abdelftah Mohamdeen","f":"07:00 ص","t":null,"e":"656828","p":["828656","N"]},"619740":{"n":"Noura Gamil Makky Ali","f":"07:00 ص","t":null,"e":"652251","p":["123456","652251","152256"]},"619771":{"n":"Hajar Abdelhakeem Sayed Mohammed","f":"07:00 ص","t":null,"e":"652008","p":["123456","652008","700256"]},"619692":{"n":"Sarah Ashraf Abass Ahmed","f":"07:00 ص","t":null,"e":"652348","p":["123456","652348","12345678"]},"619843":{"n":"Eman Ahmed Abdalraouf Abdalghany","f":"07:00 ص","t":null,"e":"651524","p":["123456","WE"]},"616170":{"n":"Heba elsayed Mohamed Mohamed","f":"07:00 ص","t":null,"e":"654028","p":["123456"]},"616154":{"n":"Sara Ahmed ElAbd Mohammed","f":"07:00 ص","t":null,"e":"653070","p":["123456","653070","960356"]},"616159":{"n":"Maha Gamal Abu-Alhamd musa","f":"07:00 ص","t":null,"e":"653135","p":["123456","653135","431356"]},"616138":{"n":"Doaa Ahmed zaher mostafa","f":"07:00 ص","t":null,"e":"653166","p":["123456","653166","561356"]},"616196":{"n":"Nihad Mahmoud Mohamed Mahmoud","f":"07:00 ص","t":null,"e":"651583","p":["123456"]},"616195":{"n":"Fatima El_Zahraa Rabee Mohammed Ali","f":"07:00 ص","t":null,"e":"654714","p":["123456"]},"616290":{"n":"Randa Adel abdelfattah mohammed","f":"07:00 ص","t":null,"e":"652120","p":["123456","652120","911256"]},"616199":{"n":"Guliana Tharwat Samman Rex","f":"07:00 ص","t":null,"e":"652470","p":["123456","652470","964256"]},"616226":{"n":"Radwa Gamal Ahmed ELdawy","f":"07:00 ص","t":null,"e":"652538","p":["123456","652538","735256"]},"818797":{"n":"Miral Naguib Moatamed Ghaly","f":"07:00 ص","t":null,"e":"653729","p":["396572"]},"618742":{"n":"Esraa Ezaldean Kamel Mohammed","f":"07:00 ص","t":null,"e":"652472","p":["123456","652472","174256"]},"635834":{"n":"Fatma Moustafa Youssef Ibrahim","f":"07:00 ص","t":null,"e":"652766","p":["123456","652766","567256"]},"616143":{"n":"Sara Salah Taki Ahmed","f":"07:00 ص","t":null,"e":"651545","p":["123456"]},"634350":{"n":"Shimaa Saied Abdalal Abdelbary","f":"07:00 ص","t":null,"e":"651531","p":["123456"]},"634875":{"n":"Heba Abd-elbasit Mostafa Ahmed","f":"07:00 ص","t":null,"e":"653027","p":["123456","653027","620356"]},"616240":{"n":"Norhan elkazafy tagelmlok ahmed","f":"07:00 ص","t":null,"e":"653150","p":["123456","653150","941356"]}};
+  <!-- RECEPTION INFO -->
+  <div class="section" style="padding-top:0;">
+    <div class="info-title">Reception Info</div>
+    <div class="info-desc">The reception will take place at</div>
+    <div class="time-big">6:30 PM</div>
+    <div class="date-row">
+      <span>Thursday</span><span class="sep">|</span><b>31</b><span class="sep">|</span><span>December 2026</span>
+    </div>
 
-(async function loadFromFirebase() {
-  try {
-    const snapNN = await get(ref(firebaseDb, 'shifts_nn'));
-    if (snapNN.exists()) db_nn = snapNN.val();
-    const snapTech = await get(ref(firebaseDb, 'shifts_tech'));
-    if (snapTech.exists()) db_tech = snapTech.val();
-    const cnt = Object.keys(db_nn).length + Object.keys(db_tech).length;
-    if (cnt > 0) {
-      const panel = document.getElementById('adminPanel');
-      if (panel && panel.style.display !== 'none') showStats();
-    }
-  } catch(e) { console.log('Firebase load error:', e); }
-})();
+    <div class="welcome-reception">
+      <div><p>Welcome</p><p>6:00 PM</p></div>
+      <div><p>Reception</p><p>7:00 PM</p></div>
+    </div>
 
-function switchTab(t){
-  ['user','admin'].forEach(x=>{
-    document.getElementById(x+'Section').classList.toggle('active', x===t);
+    <div class="countdown-title">Countdown</div>
+    <div class="countdown-line" id="countdown">
+      <span id="cd-days">--</span> days
+      <span id="cd-hours">--</span> hours
+      <span id="cd-mins">--</span> min
+      <span id="cd-secs">--</span> sec
+    </div>
+
+    <div class="cal-card">
+      <svg class="cal-corner tl" viewBox="0 0 46 46">
+        <path d="M0 0 H46 L0 46 Z" fill="#1f3a5c"/>
+        <circle cx="14" cy="14" r="7" fill="none" stroke="#e6cd94" stroke-width="1.6"/>
+        <circle cx="17" cy="12" r="6" fill="#1f3a5c"/>
+        <circle cx="22" cy="8" r="1.4" fill="#e6cd94"/>
+        <circle cx="9" cy="30" r="4" fill="#eef0e6" stroke="#c9b98a" stroke-width="0.8"/>
+        <circle cx="15" cy="34" r="3" fill="#a9c1d6" stroke="#7ea0c2" stroke-width="0.8"/>
+      </svg>
+      <svg class="cal-corner tr" viewBox="0 0 46 46">
+        <path d="M0 0 H46 L0 46 Z" fill="#1f3a5c"/>
+        <circle cx="14" cy="14" r="7" fill="none" stroke="#e6cd94" stroke-width="1.6"/>
+        <circle cx="17" cy="12" r="6" fill="#1f3a5c"/>
+        <circle cx="22" cy="8" r="1.4" fill="#e6cd94"/>
+        <circle cx="9" cy="30" r="4" fill="#eef0e6" stroke="#c9b98a" stroke-width="0.8"/>
+        <circle cx="15" cy="34" r="3" fill="#a9c1d6" stroke="#7ea0c2" stroke-width="0.8"/>
+      </svg>
+      <svg class="cal-corner bl" viewBox="0 0 46 46">
+        <path d="M0 0 H46 L0 46 Z" fill="#1f3a5c"/>
+        <circle cx="14" cy="14" r="7" fill="none" stroke="#e6cd94" stroke-width="1.6"/>
+        <circle cx="17" cy="12" r="6" fill="#1f3a5c"/>
+        <circle cx="22" cy="8" r="1.4" fill="#e6cd94"/>
+        <circle cx="9" cy="30" r="4" fill="#eef0e6" stroke="#c9b98a" stroke-width="0.8"/>
+        <circle cx="15" cy="34" r="3" fill="#a9c1d6" stroke="#7ea0c2" stroke-width="0.8"/>
+      </svg>
+      <svg class="cal-corner br" viewBox="0 0 46 46">
+        <path d="M0 0 H46 L0 46 Z" fill="#1f3a5c"/>
+        <circle cx="14" cy="14" r="7" fill="none" stroke="#e6cd94" stroke-width="1.6"/>
+        <circle cx="17" cy="12" r="6" fill="#1f3a5c"/>
+        <circle cx="22" cy="8" r="1.4" fill="#e6cd94"/>
+        <circle cx="9" cy="30" r="4" fill="#eef0e6" stroke="#c9b98a" stroke-width="0.8"/>
+        <circle cx="15" cy="34" r="3" fill="#a9c1d6" stroke="#7ea0c2" stroke-width="0.8"/>
+      </svg>
+      <div class="cal-title">December 2026</div>
+      <table class="cal">
+        <thead>
+          <tr><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th><th>Su</th></tr>
+        </thead>
+        <tbody id="cal-body"></tbody>
+      </table>
+      <span class="add-cal" id="add-cal-btn">+ Add to Calendar</span>
+    </div>
+
+    <button class="rsvp-btn" id="rsvp-btn">Confirm Attendance</button>
+  </div>
+
+  <!-- VENUE -->
+  <div class="section" style="padding-top:0;">
+    <div class="venue-title">Wedding Reception Venue</div>
+    <div class="venue-addr">Grand Nile Garden Hall, Cairo, Egypt</div>
+    <div class="map-box">
+      <div class="map-pin">📍</div>
+      <a class="map-btn" href="https://maps.google.com" target="_blank" rel="noopener">Open in Maps ↗</a>
+    </div>
+  </div>
+
+  <!-- DRESS CODE -->
+  <div class="section" style="padding-top:0;">
+    <div class="dress-title">Dress Code</div>
+    <div class="dress-sub">White, beige &amp; gold tones</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#f4efe4;"></div>
+      <div class="swatch" style="background:#d8c08f;"></div>
+      <div class="swatch" style="background:#c9a86a;"></div>
+      <div class="swatch" style="background:#8a6f42;"></div>
+    </div>
+  </div>
+
+  <!-- SCHEDULE -->
+  <div class="section" style="padding-top:0;">
+    <div class="sched-title">Wedding Day Schedule</div>
+    <div class="timeline">
+      <div class="tl-row"><div class="time">6:00 PM</div><div class="node-col"><div class="node"></div></div><div class="label">Welcome</div></div>
+      <div class="tl-row"><div class="time">7:00 PM</div><div class="node-col"><div class="node"></div></div><div class="label">Reception</div></div>
+      <div class="tl-row"><div class="time">8:00 PM</div><div class="node-col"><div class="node"></div></div><div class="label">Dinner</div></div>
+      <div class="tl-row"><div class="time">9:00 PM</div><div class="node-col"><div class="node"></div></div><div class="label">Cake &amp; Toast</div></div>
+      <div class="tl-row"><div class="time">10:00 PM</div><div class="node-col"><div class="node"></div></div><div class="label">Farewell</div></div>
+    </div>
+  </div>
+
+  <!-- GUESTBOOK -->
+  <div class="section" style="padding-top:0;">
+    <div class="gb-title">Guestbook</div>
+    <input class="gb-field" id="gb-name" type="text" placeholder="Your name*">
+    <textarea class="gb-field" id="gb-msg" placeholder="Enter your wishes*"></textarea>
+    <button class="gb-send" id="gb-send">Send Wishes ♡</button>
+    <div class="wishes-list" id="wishes-list"></div>
+  </div>
+
+  <footer>With love, Karim &amp; Layla</footer>
+
+  </div><!-- /main-content -->
+
+<script>
+  // ---- Open invitation + start music ----
+  const bgMusic = document.getElementById('bg-music');
+  const musicToggle = document.getElementById('music-toggle');
+
+  document.getElementById('open-btn').addEventListener('click', function(){
+    document.getElementById('cover-screen').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    musicToggle.classList.add('show');
+    bgMusic.play().catch(function(){
+      // Autoplay may be blocked until the user interacts again — the toggle button still works.
+    });
   });
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>
-    b.classList.toggle('active', (i===0)===(t==='user')));
-}
 
-function adminLogin(){
-  if(document.getElementById('adminPw').value.trim()===ADMIN_PW){
-    document.getElementById('adminGate').style.display='none';
-    document.getElementById('adminPanel').style.display='block';
-    showStats();
-  } else alert2('adminErr','Wrong password!','error');
-}
-
-function adminOut(){
-  document.getElementById('adminGate').style.display='block';
-  document.getElementById('adminPanel').style.display='none';
-  document.getElementById('adminPw').value='';
-}
-
-function handleFile(file, category){
-  if(!file) return;
-  const prog = document.getElementById('progress');
-  prog.style.display='block';
-  document.getElementById('upOk').classList.remove('show');
-  document.getElementById('upErr').classList.remove('show');
-
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      const wb = XLSX.read(e.target.result, {type:'array', cellDates:false, sheetRows:0});
-      const sheetName = wb.SheetNames.find(n=>n.toLowerCase().includes('ext')) || wb.SheetNames[0];
-      const ws = wb.Sheets[sheetName];
-      const range = XLSX.utils.decode_range(ws['!ref']||'A1');
-      
-      let hdrRow = null;
-      for(let r=range.s.r; r<=Math.min(range.e.r,20); r++){
-        for(let c=range.s.c; c<=range.e.c; c++){
-          const cell = ws[XLSX.utils.encode_cell({r,c})];
-          if(cell && String(cell.v||'').toLowerCase().trim()==='login'){
-            hdrRow = r; break;
-          }
-        }
-        if(hdrRow!==null) break;
-      }
-      if(hdrRow===null){ throw new Error('Login column not found'); }
-      
-      const hdrs = {};
-      for(let c=range.s.c; c<=range.e.c; c++){
-        const cell = ws[XLSX.utils.encode_cell({r:hdrRow,c})];
-        if(cell) hdrs[c] = String(cell.v||'').toLowerCase().trim();
-      }
-      
-      const col = name => parseInt(Object.entries(hdrs).find(([,v])=>v===name)?.[0] ?? -1);
-      const colInc = name => parseInt(Object.entries(hdrs).find(([,v])=>v.includes(name))?.[0] ?? -1);
-      
-      const iLogin = Object.entries(hdrs).find(([,v])=>v==='login'||v.includes('id or login'))?.[0]*1 ?? -1;
-      const iName  = col('name');
-      const iAccount = colInc('account');
-      const iAgent = col('agent');
-      const iSite  = col('site');
-      const iFrom  = colInc('from') >= 0 ? colInc('from') : col('shift');
-      const iExt   = col('ext');
-      const passC  = Object.entries(hdrs).filter(([,v])=>v.startsWith('pass')).map(([k])=>parseInt(k));
-      
-      const newDb = {};
-      let count = 0;
-
-      for(let r=hdrRow+1; r<=range.e.r; r++){
-        const loginCell = ws[XLSX.utils.encode_cell({r, c:iLogin})];
-        if(!loginCell || !loginCell.v) continue;
-        
-        let login;
-        try{ login = String(Math.round(Number(loginCell.v))); } catch(e){ continue; }
-        
-        const nameCell = ws[XLSX.utils.encode_cell({r, c:iName})];
-        const name = nameCell && nameCell.v && nameCell.v!=='NA' ? String(nameCell.v) : null;
-        
-        const accountCell = iAccount >= 0 ? ws[XLSX.utils.encode_cell({r, c:iAccount})] : null;
-        const account = accountCell && accountCell.v ? String(accountCell.v) : null;
-        
-        const agentCell = iAgent >= 0 ? ws[XLSX.utils.encode_cell({r, c:iAgent})] : null;
-        const agent = agentCell && agentCell.v ? String(agentCell.v) : null;
-        
-        const fromCell = ws[XLSX.utils.encode_cell({r, c:iFrom})];
-        const frm = fromCell ? xlTime(fromCell.v) : null;
-        
-        const siteCell = iSite >= 0 ? ws[XLSX.utils.encode_cell({r, c:iSite})] : null;
-        const site = siteCell && siteCell.v ? String(siteCell.v) : null;
-        
-        const extCell = ws[XLSX.utils.encode_cell({r, c:iExt})];
-        let ext = null;
-        if(extCell && extCell.v!=null && extCell.v!==''){
-          try{ ext = String(Math.round(Number(extCell.v))); } catch(e){ ext=String(extCell.v); }
-        }
-        
-        // Take FIRST password only
-        let firstPass = null;
-        for(const pc of passC){
-          const pc2 = ws[XLSX.utils.encode_cell({r, c:pc})];
-          if(pc2 && pc2.v!=null && pc2.v!==''){
-            try{ firstPass = String(Math.round(Number(pc2.v))); }catch(e){ firstPass=String(pc2.v); }
-            break;
-          }
-        }
-        
-        newDb[login] = {n:name, a:account, ag:agent, f:frm, s:site, e:ext, p:firstPass};
-        count++;
-      }
-      
-      if (category === 'nn') db_nn = newDb;
-      else if (category === 'tech') db_tech = newDb;
-      
-      prog.style.display='none';
-      set(ref(firebaseDb, 'shifts_' + category), newDb)
-        .then(() => { alert2('upOk', `✅ Loaded ${count} employees (${category.toUpperCase()}) - saved to server`, 'success'); })
-        .catch(e => { alert2('upOk', `✅ Loaded ${count} employees (${category.toUpperCase()})`, 'success'); });
-      showStats();
-    } catch(err){
-      prog.style.display='none';
-      alert2('upErr','Error: '+err.message,'error');
+  musicToggle.addEventListener('click', function(){
+    if(bgMusic.paused){
+      bgMusic.play();
+      musicToggle.classList.remove('paused');
+    } else {
+      bgMusic.pause();
+      musicToggle.classList.add('paused');
     }
-  };
-  reader.readAsArrayBuffer(file);
-}
+  });
 
-function xlTime(val){
-  if(val==null) return null;
-  const n = Number(val);
-  if(isNaN(n)) return String(val);
-  const frac = n % 1;
-  const tot = Math.round(frac*24*60);
-  const h = Math.floor(tot/60)%24;
-  const m = tot%60;
-  const ap = h>=12?'PM':'AM';
-  const h12 = h%12||12;
-  return String(h12).padStart(2,'0')+':'+String(m).padStart(2,'0')+' '+ap;
-}
+  // ---- Target date: December 31, 2026, 6:00 PM ----
+  const targetDate = new Date(2026, 11, 31, 18, 0, 0);
 
-function showStats(){
-  document.getElementById('statCountNN').textContent = Object.keys(db_nn).length;
-  document.getElementById('statCountTech').textContent = Object.keys(db_tech).length;
-  document.getElementById('statRow').style.display='flex';
-}
-
-function deleteData(category){
-  if(!confirm(`Delete all ${category === 'nn' ? 'NN' : 'Tech'} data?`)) return;
-  if(category === 'nn') db_nn = {};
-  else db_tech = {};
-  set(ref(firebaseDb, 'shifts_' + category), null)
-    .then(() => { showStats(); alert2('upOk', `✅ ${category.toUpperCase()} data deleted`, 'success'); })
-    .catch(e => { alert2('upErr', 'Error: ' + e.message, 'error'); });
-}
-
-function doSearch(){
-  const val = document.getElementById('loginInput').value.trim();
-  document.getElementById('userErr').classList.remove('show');
-  document.getElementById('resBox').classList.remove('show');
-  if(!val){ alert2('userErr','Please enter Login','error'); return; }
-  
-  let rec = null;
-  let foundIn = null;
-  
-  if(db_nn[val]) { rec = db_nn[val]; foundIn = 'NON'; }
-  else if(db_tech[val]) { rec = db_tech[val]; foundIn = 'Tech'; }
-  
-  if(!rec){ alert2('userErr','Login not found: '+val,'error'); return; }
-  
-  // Get name: from base db first, then fallback to record
-  let displayName = db[val] && db[val].n ? db[val].n : rec.n;
-  
-  document.getElementById('resLoginLbl').textContent = 'Login: '+val+' ('+foundIn+')';
-  const cleanName = displayName ? displayName.replace(/\d/g, '').trim() : '—';
-  document.getElementById('resName').textContent = cleanName || '—';
-  document.getElementById('resFrom').textContent = rec.f || '—';
-  document.getElementById('resExt').textContent  = rec.e || '—';
-
-  if(rec.a){
-    document.getElementById('resAccount').textContent = rec.a;
-    document.getElementById('accountItem').style.display = 'block';
-  } else {
-    document.getElementById('accountItem').style.display = 'none';
+  function updateCountdown(){
+    const now = new Date();
+    let diff = targetDate - now;
+    if(diff < 0) diff = 0;
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff / (1000*60*60)) % 24);
+    const mins = Math.floor((diff / (1000*60)) % 60);
+    const secs = Math.floor((diff / 1000) % 60);
+    document.getElementById('cd-days').textContent = days;
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
   }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 
-  if(rec.ag){
-    document.getElementById('resName').textContent = rec.ag;
-  } else {
-    document.getElementById('agentItem').style.display = 'none';
+  // ---- Build December 2026 calendar, Monday-first, mark the 31st ----
+  function buildCalendar(){
+    const year = 2026, month = 11; // December
+    const markedDay = 31;
+    const firstOfMonth = new Date(year, month, 1);
+    // Monday=0 ... Sunday=6
+    let startOffset = (firstOfMonth.getDay() + 6) % 7;
+    const daysInMonth = new Date(year, month+1, 0).getDate();
+
+    const cells = [];
+    for(let i=0;i<startOffset;i++) cells.push(null);
+    for(let d=1; d<=daysInMonth; d++) cells.push(d);
+    while(cells.length % 7 !== 0) cells.push(null);
+
+    const tbody = document.getElementById('cal-body');
+    tbody.innerHTML = '';
+    for(let r=0; r<cells.length/7; r++){
+      const tr = document.createElement('tr');
+      for(let c=0; c<7; c++){
+        const val = cells[r*7+c];
+        const td = document.createElement('td');
+        if(val){
+          if(val === markedDay){
+            td.classList.add('marked');
+            td.innerHTML = '<span>' + val + '</span>';
+          } else {
+            td.textContent = val;
+          }
+        }
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);
+    }
   }
+  buildCalendar();
 
-  if(rec.s){
-    document.getElementById('resSite').textContent = rec.s;
-    document.getElementById('siteItem').style.display = 'block';
-  } else {
-    document.getElementById('siteItem').style.display = 'none';
-  }
-  
-  const pl = document.getElementById('resPasses');
-  pl.innerHTML = '';
-  if(rec.p){
-    const d = document.createElement('div');
-    d.className = 'pass-single';
-    d.innerHTML = `<span class="lbl">Password</span><span class="val">${rec.p}</span>`;
-    pl.appendChild(d);
-  } else {
-    pl.innerHTML = '<div style="color:#f87171;font-size:.88rem">⚠️ No password found</div>';
-  }
-  
-  document.getElementById('resBox').classList.add('show');
-}
+  // ---- Add to calendar (.ics download) ----
+  document.getElementById('add-cal-btn').addEventListener('click', function(){
+    const dt = "20261231T180000";
+    const dtEnd = "20261231T230000";
+    const ics = [
+      "BEGIN:VCALENDAR","VERSION:2.0","BEGIN:VEVENT",
+      "SUMMARY:Karim & Layla's Wedding",
+      "DTSTART:" + dt,
+      "DTEND:" + dtEnd,
+      "LOCATION:Grand Nile Garden Hall, Cairo, Egypt",
+      "DESCRIPTION:Wedding Reception of Karim & Layla",
+      "END:VEVENT","END:VCALENDAR"
+    ].join("\r\n");
+    const blob = new Blob([ics], {type:'text/calendar'});
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'wedding-invite.ics';
+    link.click();
+  });
 
-function alert2(id,msg,type){
-  const el=document.getElementById(id);
-  el.textContent=msg;
-  el.className='alert alert-'+type+' show';
-}
+  // ---- RSVP button ----
+  document.getElementById('rsvp-btn').addEventListener('click', function(){
+    this.textContent = 'Thank You — Attendance Confirmed ✓';
+    this.style.background = '#3a5a3a';
+  });
 
-window.switchTab = switchTab;
-window.adminLogin = adminLogin;
-window.adminOut = adminOut;
-window.handleFile = handleFile;
-window.doSearch = doSearch;
-window.deleteData = deleteData;
+  // ---- Guestbook ----
+  document.getElementById('gb-send').addEventListener('click', function(){
+    const name = document.getElementById('gb-name').value.trim();
+    const msg = document.getElementById('gb-msg').value.trim();
+    if(!name || !msg) return;
+    const wish = document.createElement('div');
+    wish.className = 'wish';
+    wish.innerHTML = '<b>' + name + ':</b> ' + msg;
+    document.getElementById('wishes-list').prepend(wish);
+    document.getElementById('gb-name').value = '';
+    document.getElementById('gb-msg').value = '';
+  });
 </script>
 </body>
 </html>
