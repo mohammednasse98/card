@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mohamed &amp; Nihal</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@400;600&family=Lora:ital@0;1&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1b3f73;
+      --navy-d: #102a52;
+      --ivory: #faf5f1;
+      --blue: #8fa9cf;
+      --blue-l: #dbe5f3;
+      --gold: #c9a96a;
+      --serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+      --body: 'Lora', Georgia, serif
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: auto
+    }
+
+    /* Music button (left side) */
+    #musicBtn {
+      position: fixed;
+      left: 14px;
+      bottom: 22px;
+      z-index: 60;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .5);
+      background: var(--navy);
+      color: #fff;
+      display: none;
+      place-items: center;
+      box-shadow: 0 8px 20px rgba(27, 63, 115, .4);
+      padding: 0
+    }
+
+    #musicBtn.show {
+      display: grid
+    }
+
+    #musicBtn svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff
+    }
+
+    #musicBtn .off {
+      display: none
+    }
+
+    #musicBtn.muted .on {
+      display: none
+    }
+
+    #musicBtn.muted .off {
+      display: block
+    }
+
+    #musicBtn.playing:not(.muted) {
+      animation: pulse 2s infinite
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(27, 63, 115, .5)
+      }
+
+      70% {
+        box-shadow: 0 0 0 14px rgba(27, 63, 115, 0)
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(27, 63, 115, 0)
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--body);
+      color: var(--navy);
+      background: var(--ivory);
+      text-align: center;
+      overflow-x: hidden;
+      line-height: 1.6
+    }
+
+    body.locked {
+      overflow: hidden;
+      height: 100vh
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      margin: 0
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 3px
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer
+    }
+
+    /* ---------- Cover (matches screenshot) ---------- */
+    #cover {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 50% 20%, #2a5496, var(--navy-d));
+      transition: opacity 1s, visibility 1s
+    }
+
+    #cover.gone {
+      opacity: 0;
+      visibility: hidden
+    }
+
+    #snow {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .8s
+    }
+
+    #cover.opening #snow {
+      opacity: 1
+    }
+
+    .card {
+      position: relative;
+      width: min(88vw, 380px);
+      aspect-ratio: 3/4.3;
+      background: var(--ivory);
+      border-radius: 6px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+      padding: 2.2rem 1rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 1s, opacity .8s
+    }
+
+    #cover.opening .card {
+      transform: scale(1.15);
+      opacity: 0
+    }
+
+    .heart {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 8px 20px rgba(27, 63, 115, .4);
+      z-index: 2
+    }
+
+    .heart svg {
+      width: 28px;
+      fill: #fff
+    }
+
+    .card .fl {
+      position: absolute;
+      opacity: .9
+    }
+
+    .fl-a {
+      left: -60px;
+      top: 22%;
+      width: 170px
+    }
+
+    .fl-b {
+      right: -70px;
+      top: 30%;
+      width: 200px
+    }
+
+    .fl-c {
+      left: -40px;
+      top: 52%;
+      width: 130px
+    }
+
+    .card h1 {
+      font-size: clamp(2rem, 9vw, 2.6rem);
+      letter-spacing: -.02em;
+      line-height: 1.1;
+      margin-top: 1.8rem;
+      z-index: 2
+    }
+
+    .card .amp {
+      font-style: italic;
+      font-size: 1.3rem;
+      display: block
+    }
+
+    .rule {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      width: 70%;
+      margin: 1rem 0;
+      z-index: 2
+    }
+
+    .rule::before,
+    .rule::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--navy)
+    }
+
+    .rule i {
+      width: 8px;
+      height: 8px;
+      background: var(--navy);
+      transform: rotate(45deg)
+    }
+
+    .card .date {
+      font-size: 1.45rem;
+      z-index: 2
+    }
+
+    .card .cord {
+      font-size: 1.3rem;
+      margin: 1.2rem 0;
+      z-index: 2
+    }
+
+    .open {
+      background: var(--navy);
+      color: #fff;
+      border: 0;
+      border-radius: 999px;
+      padding: .8rem 3rem;
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      box-shadow: 0 8px 20px rgba(27, 63, 115, .4);
+      z-index: 2;
+      transition: transform .2s
+    }
+
+    .open:hover {
+      transform: translateY(-2px)
+    }
+
+    /* ---------- Pages ---------- */
+    .page {
+      min-height: 100svh;
+      padding: 4rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--ivory), #f2f1f4)
+    }
+
+    .page>* {
+      position: relative;
+      z-index: 1
+    }
+
+    .bloom {
+      position: absolute;
+      z-index: 0;
+      opacity: .5;
+      pointer-events: none
+    }
+
+    .b-tl {
+      top: -50px;
+      left: -70px;
+      width: 220px
+    }
+
+    .b-br {
+      bottom: -60px;
+      right: -80px;
+      width: 240px;
+      opacity: .65
+    }
+
+    .b-r {
+      top: 40%;
+      right: -90px;
+      width: 200px
+    }
+
+    .sec-title {
+      font-family: var(--serif);
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 1.25rem;
+      margin: 1.5rem 0 .6rem
+    }
+
+    .sm {
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-size: .85rem;
+      max-width: 22rem
+    }
+
+    .big {
+      font-size: clamp(2.6rem, 12vw, 3.8rem)
+    }
+
+    .amp2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 2rem;
+      margin: .5rem 0
+    }
+
+    .garland {
+      width: min(80vw, 300px);
+      margin: 1.5rem auto
+    }
+
+    /* Ornate name frame */
+    .frame {
+      width: min(78vw, 300px);
+      aspect-ratio: 3/4.4;
+      position: relative;
+      display: grid;
+      place-items: center
+    }
+
+    .frame svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%
+    }
+
+    .frame h2 {
+      font-size: clamp(1.8rem, 8vw, 2.3rem);
+      line-height: 1.1
+    }
+
+    .frame .amp2 {
+      font-size: 1.1rem
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .9s, transform .9s
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none
+    }
+
+    /* Photos */
+    .photos {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: .7rem;
+      width: min(92vw, 520px);
+      height: min(80vw, 400px);
+      margin-top: 1rem
+    }
+
+    .photos button {
+      border: 0;
+      padding: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #6b6a66;
+      box-shadow: 0 8px 20px rgba(27, 63, 115, .2)
+    }
+
+    .photos button:first-child {
+      grid-row: 1/3
+    }
+
+    .photos img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s
+    }
+
+    .photos button:hover img {
+      transform: scale(1.07)
+    }
+
+    /* Date */
+    .dateblock {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1rem 0
+    }
+
+    .dateblock .d {
+      font-family: var(--serif);
+      font-size: 3.8rem;
+      border-left: 1px solid var(--navy);
+      border-right: 1px solid var(--navy);
+      padding: 0 1.2rem;
+      line-height: 1
+    }
+
+    .times {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      margin: 1rem 0
+    }
+
+    .times b {
+      display: block;
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      margin-top: .2rem
+    }
+
+    .cd {
+      font-family: var(--serif);
+      letter-spacing: .06em;
+      margin: 1rem 0
+    }
+
+    .cal {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      width: min(88vw, 320px);
+      padding: 1rem;
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .7);
+      font-size: .85rem
+    }
+
+    .cal .cap {
+      grid-column: 1/-1;
+      font-family: var(--serif);
+      font-weight: 600;
+      margin-bottom: .4rem
+    }
+
+    .cal .hit {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 50%
+    }
+
+    .cal .dw {
+      opacity: .6;
+      font-size: .7rem
+    }
+
+    .link {
+      background: none;
+      border: 0;
+      color: var(--navy);
+      text-decoration: underline;
+      font-family: var(--serif);
+      margin: 1rem 0
+    }
+
+    .pill {
+      display: inline-block;
+      background: var(--navy);
+      color: #fff;
+      border: 0;
+      border-radius: 999px;
+      padding: .8rem 2rem;
+      font-family: var(--serif);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-size: .85rem;
+      text-decoration: none;
+      margin-top: 1rem
+    }
+
+    .pill:hover {
+      background: var(--navy-d)
+    }
+
+    /* Map */
+    .map {
+      width: min(92vw, 520px);
+      aspect-ratio: 4/3;
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 1rem 0
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0
+    }
+
+    /* Dress */
+    .sw {
+      display: flex;
+      gap: 1.3rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0;
+      list-style: none
+    }
+
+    .sw i {
+      display: block;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px #fff, 0 0 0 4px var(--gold)
+    }
+
+    .sw span {
+      font-size: .8rem
+    }
+
+    /* Timeline */
+    .tl {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0 0;
+      position: relative;
+      width: min(88vw, 300px);
+      text-align: left
+    }
+
+    .tl::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--navy)
+    }
+
+    .tl li {
+      display: grid;
+      grid-template-columns: 1fr 20px 1fr;
+      align-items: center;
+      gap: .6rem;
+      padding: .9rem 0
+    }
+
+    .tl li::after {
+      content: "";
+      grid-column: 2;
+      grid-row: 1;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--navy);
+      margin: auto
+    }
+
+    .tl time {
+      grid-column: 1;
+      grid-row: 1;
+      text-align: right;
+      font-family: var(--serif)
+    }
+
+    .tl span {
+      grid-column: 3;
+      grid-row: 1
+    }
+
+    /* Guestbook */
+    form.f {
+      display: flex;
+      flex-direction: column;
+      gap: .7rem;
+      width: min(92vw, 400px);
+      text-align: left
+    }
+
+    .f label {
+      font-size: .85rem
+    }
+
+    .f input,
+    .f textarea {
+      font: inherit;
+      padding: .8rem;
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .85);
+      color: var(--navy);
+      width: 100%
+    }
+
+    .err {
+      color: #a3414b;
+      font-size: .85rem;
+      margin: 0;
+      min-height: 1.1em
+    }
+
+    .ok {
+      font-style: italic
+    }
+
+    .wishes {
+      display: grid;
+      gap: .8rem;
+      width: min(92vw, 400px);
+      margin-top: 1rem
+    }
+
+    .wish {
+      background: #fff;
+      border: 1px solid var(--blue-l);
+      border-left: 3px solid var(--navy);
+      border-radius: 8px;
+      padding: .8rem;
+      text-align: left
+    }
+
+    .note {
+      font-size: .8rem;
+      opacity: .7;
+      max-width: 22rem
+    }
+
+    footer {
+      padding: 3rem 1rem;
+      background: var(--navy);
+      color: #fff
+    }
+
+    footer button {
+      background: none;
+      border: 1px solid #fff;
+      color: #fff;
+      border-radius: 999px;
+      padding: .6rem 1.6rem;
+      margin-top: 1rem
+    }
+
+    /* Lightbox */
+    .lb {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 20, 40, .93);
+      z-index: 80;
+      display: grid;
+      place-items: center
+    }
+
+    .lb[hidden] {
+      display: none
+    }
+
+    .lb img {
+      max-width: 92vw;
+      max-height: 80vh;
+      border-radius: 8px
+    }
+
+    .lb button {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: none;
+      border: 0;
+      color: #fff;
+      font-size: 2.4rem
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      * {
+        transition: none !important;
+        animation: none !important
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none
+      }
+    }
+  </style>
+</head>
+
+<body class="locked">
+
+  <!-- Reusable flower art (blue / white watercolor-style blooms) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <radialGradient id="pb" cx=".5" cy=".5" r=".6">
+        <stop offset="0" stop-color="#e9effa" />
+        <stop offset="1" stop-color="#8fa9cf" />
+      </radialGradient>
+      <radialGradient id="pw" cx=".5" cy=".5" r=".6">
+        <stop offset="0" stop-color="#fff" />
+        <stop offset="1" stop-color="#d4deee" />
+      </radialGradient>
+      <g id="petals">
+        <ellipse cx="50" cy="24" rx="19" ry="25" />
+        <ellipse cx="50" cy="24" rx="19" ry="25" transform="rotate(72 50 50)" />
+        <ellipse cx="50" cy="24" rx="19" ry="25" transform="rotate(144 50 50)" />
+        <ellipse cx="50" cy="24" rx="19" ry="25" transform="rotate(216 50 50)" />
+        <ellipse cx="50" cy="24" rx="19" ry="25" transform="rotate(288 50 50)" />
+      </g>
+    </defs>
+    <symbol id="bloomB" viewBox="0 0 100 100">
+      <use href="#petals" fill="url(#pb)" stroke="#6f8cb8" stroke-width=".6" />
+      <circle cx="50" cy="50" r="9" fill="#e9d8a6" />
+      <circle cx="50" cy="50" r="4" fill="#c9a96a" />
+    </symbol>
+    <symbol id="bloomW" viewBox="0 0 100 100">
+      <use href="#petals" fill="url(#pw)" stroke="#b8c7de" stroke-width=".6" />
+      <circle cx="50" cy="50" r="9" fill="#f0e2b4" />
+      <circle cx="50" cy="50" r="4" fill="#c9a96a" />
+    </symbol>
+    <symbol id="garland" viewBox="0 0 300 50">
+      <path d="M10 25 Q80 5 150 25 T290 25" fill="none" stroke="#c9a96a" stroke-width="1.5" />
+      <use href="#bloomW" x="120" y="0" width="60" height="50" />
+      <use href="#bloomB" x="60" y="10" width="30" height="30" />
+      <use href="#bloomB" x="210" y="10" width="30" height="30" />
+    </symbol>
+  </svg>
+
+  <!-- ===== COVER ===== -->
+  <section id="cover" aria-label="Invitation cover">
+    <canvas id="snow"></canvas>
+    <div class="card">
+      <svg class="fl fl-a">
+        <use href="#bloomW" />
+      </svg><svg class="fl fl-b">
+        <use href="#bloomB" />
+      </svg><svg class="fl fl-c">
+        <use href="#bloomW" />
+      </svg>
+      <div class="heart"><svg viewBox="0 0 24 24">
+          <path d="M12 21s-8-5.3-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.700-8 11-8 11z" />
+        </svg></div>
+      <h1><span data-b="GROOM_U"></span><span class="amp">&amp;</span><span data-b="BRIDE_U"></span></h1>
+      <div class="rule"><i></i></div>
+      <div class="date" data-b="dateShort"></div>
+      <div class="cord">Cordially Invites</div>
+      <button class="open" id="openBtn" type="button">Open</button>
+    </div>
+  </section>
+
+  <main id="invite">
+    <!-- Names in ornate frame -->
+    <section class="page">
+      <svg class="bloom b-tl">
+        <use href="#bloomB" />
+      </svg><svg class="bloom b-br">
+        <use href="#bloomW" />
+      </svg>
+      <div class="frame reveal">
+        <svg viewBox="0 0 300 440" fill="none">
+          <path
+            d="M150 12c40 0 50 20 80 22s50 30 50 70v232c0 40-20 66-50 70s-40 22-80 22-50-18-80-22-50-30-50-70V104c0-40 20-68 50-70s40-22 80-22z"
+            stroke="#c9a96a" stroke-width="5" />
+          <path
+            d="M150 26c36 0 46 18 74 20s44 26 44 62v224c0 36-18 58-44 62s-38 20-74 20-48-16-74-20-44-26-44-62V108c0-36 18-60 44-62s38-20 74-20z"
+            stroke="#1b3f73" stroke-width="2" />
+          <use href="#bloomB" x="12" y="250" width="90" height="90" />
+          <use href="#bloomW" x="20" y="320" width="70" height="70" />
+          <use href="#bloomB" x="205" y="300" width="80" height="80" />
+          <use href="#bloomW" x="215" y="90" width="60" height="60" />
+          <use href="#bloomB" x="125" y="370" width="50" height="50" />
+        </svg>
+        <div>
+          <h2 data-b="GROOM_U"></h2>
+          <div class="amp2">&amp;</div>
+          <h2 data-b="BRIDE_U"></h2>
+        </div>
+      </div>
+      <h2 class="sec-title reveal">Ceremony Info</h2>
+      <p class="sm reveal">We joyfully announce the wedding of our children</p>
+    </section>
+
+    <!-- Groom / Bride -->
+    <section class="page">
+      <svg class="bloom b-r">
+        <use href="#bloomB" />
+      </svg><svg class="bloom b-tl">
+        <use href="#bloomW" />
+      </svg>
+      <h2 class="big reveal" data-b="groom"></h2>
+      <p class="sm reveal">Groom</p>
+      <div class="amp2 reveal">&amp;</div>
+      <h2 class="big reveal" data-b="bride"></h2>
+      <p class="sm reveal">Bride</p>
+      <svg class="garland reveal" viewBox="0 0 300 50">
+        <use href="#garland" />
+      </svg>
+      <h2 class="sec-title reveal">Photo Gallery</h2>
+      <div class="photos reveal" id="photos"></div>
+    </section>
+
+    <!-- Reception info + calendar -->
+    <section class="page">
+      <svg class="bloom b-br">
+        <use href="#bloomB" />
+      </svg>
+      <h2 class="sec-title reveal">Reception Info</h2>
+      <p class="sm reveal">The reception will take place at</p>
+      <p class="reveal" style="font-family:var(--serif);font-size:1.4rem;margin:.3rem 0" data-b="time"></p>
+      <div class="dateblock reveal"><span data-b="weekday"></span><span class="d" data-b="day"></span><span
+          data-b="monthUpper"></span></div>
+      <div class="reveal" data-b="year"></div>
+      <div class="times reveal">
+        <div>Welcome<b data-b="welcome"></b></div>
+        <div>Reception<b data-b="reception"></b></div>
+      </div>
+      <h3 class="sec-title reveal">Countdown</h3>
+      <div class="cd reveal" id="cd" role="timer"></div>
+      <div class="cal reveal" id="cal"></div>
+      <button class="link" id="addCal" type="button">Add to Calendar</button>
+    </section>
+
+    <!-- Venue -->
+    <section class="page">
+      <h2 class="sec-title reveal">Wedding Reception Venue</h2>
+      <p data-b="venueName" style="font-family:var(--serif);font-size:1.3rem;margin:.2rem"></p>
+      <p class="sm" data-b="address"></p>
+      <div class="map reveal"><iframe id="map" title="Venue map" loading="lazy"></iframe></div>
+      <a class="pill" id="mapBtn" target="_blank" rel="noopener" href="#">Open in Google Maps</a>
+    </section>
+
+  </main>
+
+  <footer>
+    <h2 style="font-size:2rem"><span data-b="groom"></span> &amp; <span data-b="bride"></span></h2>
+    <p data-b="dateLong"></p>
+    <p style="font-style:italic">Thank you for being part of our story.</p>
+    <button id="top" type="button">Back to top</button>
+  </footer>
+
+  <audio id="bgm" preload="auto" playsinline></audio>
+  <button id="musicBtn" type="button" aria-label="Toggle music">
+    <svg class="on" viewBox="0 0 24 24">
+      <path
+        d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z" />
+    </svg>
+    <svg class="off" viewBox="0 0 24 24">
+      <path
+        d="M16.5 12A4.5 4.5 0 0 0 14 8v2.2l2.5 2.5V12zM19 12a7 7 0 0 1-.9 3.4l1.5 1.5A9 9 0 0 0 21 12a9 9 0 0 0-7-8.8v2.1A7 7 0 0 1 19 12zM4.3 3 3 4.3 7.7 9H3v6h4l5 5v-6.7l4.2 4.2c-.7.5-1.400.9-2.200 1.100v2.100a9 9 0 0 0 3.600-1.800l2 2 1.300-1.300L4.300 3zM12 4 9.900 6.100 12 8.200V4z" />
+    </svg>
+  </button>
+
+  <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer"><button id="lbX"
+      aria-label="Close">&times;</button><img id="lbImg" alt=""></div>
+
+  <script>
+    /* ================= CONFIG: edit here ================= */
+    const CONFIG = {
+      /* الأغنية: حط ملف الأغنية جنب ملف الـ html باسم song.mp3 (أو غيّر الاسم هنا)
+         start / end = الثواني اللي هتشتغل بينهم، ولما توصل لـ end ترجع تعيد من start */
+      music: { src: "nihal.mp3", start: 0, end: 45 },
+      groom: "Mohamed", bride: "Nihal",
+      date: "2026-12-31T17:00:00",            // wedding date & time (local)
+      welcome: "7:00 PM", reception: "6:00 PM",
+      venueName: "Wedding Reception Venue", address: "Your venue address here",
+      mapsUrl: "https://maps.app.goo.gl/aXxhozkmiKeE976R9?g_st=iw" + encodeURIComponent("Cairo, Egypt"),
+      mapsEmbed: "https://maps.google.com/maps?q=" + encodeURIComponent("قاعة فيرمونت ريو، نادي ضباط القوات المسلحة، طلخا، الدقهلية") + "&output=embed",
+      photos: [ // 3 photos: big one first. Put real paths in src; empty = placeholder
+        { src: "n1.jpeg", alt: "Mohamed and Nihal together" }, { src: "n2.jpeg", alt: "A happy moment" }, { src: "n3.jpeg", alt: "Our story" }],
+    };
+    /* ===================================================== */
+    const $ = (s, r = document) => r.querySelector(s), D = new Date(CONFIG.date);
+    const L = (o) => D.toLocaleDateString("en-US", o);
+
+    /** Fill all data-b placeholders and build config-driven sections. */
+    function render() {
+      const v = {
+        groom: CONFIG.groom, bride: CONFIG.bride, GROOM_U: CONFIG.groom.toUpperCase(), BRIDE_U: CONFIG.bride.toUpperCase(),
+        dateShort: L({ month: "long", day: "numeric", year: "numeric" }), dateLong: L({ weekday: "long", month: "long", day: "numeric", year: "numeric" }),
+        time: D.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" }), weekday: L({ weekday: "long" }), day: D.getDate(),
+        monthUpper: L({ month: "long" }).toUpperCase(), year: D.getFullYear(), welcome: CONFIG.welcome, reception: CONFIG.reception,
+        venueName: CONFIG.venueName, address: CONFIG.address
+      };
+      document.querySelectorAll("[data-b]").forEach(e => e.textContent = v[e.dataset.b] ?? "");
+      document.title = `${CONFIG.groom} & ${CONFIG.bride}`;
+      $("#map").src = CONFIG.mapsEmbed; $("#mapBtn").href = CONFIG.mapsUrl;
+    }
+
+    /** Placeholder image so the gallery works without real photos. */
+    function ph(t) { return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3f3f3d"/><stop offset="1" stop-color="#a69f90"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/><g fill="#fff" transform="translate(300 300)"><circle cx="0" cy="-34" r="22"/><circle cx="32" cy="-10" r="22"/><circle cx="20" cy="28" r="22"/><circle cx="-20" cy="28" r="22"/><circle cx="-32" cy="-10" r="22"/><circle r="12" fill="#a69f90"/></g></svg>`) }
+
+    /** Gallery with lightbox. */
+    function gallery() {
+      const items = CONFIG.photos.map((p, i) => ({ src: p.src || ph("Photo " + (i + 1)), alt: p.alt }));
+      items.forEach(it => {
+        const b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Enlarge: " + it.alt);
+        const im = new Image(); im.src = it.src; im.alt = it.alt; im.loading = "lazy"; b.append(im);
+        b.onclick = () => { $("#lbImg").src = it.src; $("#lbImg").alt = it.alt; $("#lb").hidden = false; $("#lbX").focus() }; $("#photos").append(b)
+      });
+      const c = () => $("#lb").hidden = true; $("#lbX").onclick = c; $("#lb").onclick = e => { if (e.target.id === "lb") c() };
+      addEventListener("keydown", e => { if (e.key === "Escape") c() });
+    }
+
+    /** Live countdown. */
+    function countdown() {
+      const el = $("#cd"); const z = n => String(n).padStart(2, "0");
+      const t = () => {
+        let d = Math.max(0, D - new Date()); const days = Math.floor(d / 864e5); d %= 864e5; const h = Math.floor(d / 36e5); d %= 36e5;
+        el.textContent = `${days} days ${z(h)} hrs ${z(Math.floor(d / 6e4))} min ${z(Math.floor(d % 6e4 / 1e3))} sec`
+      };
+      t(); setInterval(t, 1000);
+    }
+
+    /** Month calendar + .ics download. */
+    function calendar() {
+      const y = D.getFullYear(), m = D.getMonth(), f = new Date(y, m, 1).getDay(), n = new Date(y, m + 1, 0).getDate();
+      let h = `<div class="cap">${L({ month: "long", year: "numeric" })}</div>` + ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map(d => `<div class="dw">${d}</div>`).join("");
+      for (let i = 0; i < f; i++)h += "<div></div>"; for (let d = 1; d <= n; d++)h += `<div class="${d === D.getDate() ? "hit" : ""}">${d}</div>`;
+      $("#cal").innerHTML = h;
+      $("#addCal").onclick = () => {
+        const z = n => String(n).padStart(2, "0"), s = d => `${d.getFullYear()}${z(d.getMonth() + 1)}${z(d.getDate())}T${z(d.getHours())}${z(d.getMinutes())}00`;
+        const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "BEGIN:VEVENT", "UID:" + Date.now() + "@invite", "DTSTAMP:" + s(new Date()), "DTSTART:" + s(D), "DTEND:" + s(new Date(+D + 5 * 36e5)),
+          `SUMMARY:Wedding of ${CONFIG.groom} & ${CONFIG.bride}`, "LOCATION:" + CONFIG.address.replace(/,/g, "\\,"), "END:VEVENT", "END:VCALENDAR"].join("\r\n");
+        const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" })); a.download = "wedding.ics"; a.click()
+      };
+    }
+
+    /** Scroll reveal. */
+    function reveal() {
+      const els = document.querySelectorAll(".reveal");
+      if (!("IntersectionObserver" in window)) { els.forEach(e => e.classList.add("in")); return }
+      const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target) } }), { threshold: .15 }); els.forEach(e => io.observe(e))
+    }
+
+    /** Snowflake canvas shown while the cover opens (like the video). */
+    function snow() {
+      const c = $("#snow"), x = c.getContext("2d"); let w, h, f = [];
+      const rs = () => { w = c.width = innerWidth; h = c.height = innerHeight }; rs(); addEventListener("resize", rs);
+      for (let i = 0; i < 60; i++)f.push({ x: Math.random() * w, y: Math.random() * h, r: 1 + Math.random() * 3, s: .4 + Math.random() * 1.2 });
+      let on = true; (function t() {
+        if (!on) return; x.clearRect(0, 0, w, h); x.fillStyle = "rgba(180,205,245,.8)";
+        f.forEach(p => { p.y += p.s; if (p.y > h) p.y = -5; x.beginPath(); x.arc(p.x + Math.sin(p.y / 30) * 8, p.y, p.r, 0, 7); x.fill() }); requestAnimationFrame(t)
+      })();
+      return () => on = false
+    }
+
+    /* Always start at the very top (no restored scroll position, no auto-scroll) */
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    const toTop = () => {
+      const h = document.documentElement; h.style.scrollBehavior = "auto";
+      h.scrollTop = 0; document.body.scrollTop = 0; window.scrollTo(0, 0);
+    };
+    toTop();
+    addEventListener("load", toTop);
+    addEventListener("pageshow", toTop);
+
+    /** Background music: plays only between start and end seconds, then loops back to start. */
+    function music() {
+      const a = $("#bgm"), btn = $("#musicBtn"), M = CONFIG.music;
+      a.src = M.src; a.loop = false;
+      const seek = () => { try { a.currentTime = M.start } catch (e) { } };
+      a.addEventListener("loadedmetadata", seek);
+      a.addEventListener("timeupdate", () => { if (a.currentTime >= M.end) { a.currentTime = M.start; if (a.paused) a.play().catch(() => { }) } });
+      a.addEventListener("ended", () => { seek(); a.play().catch(() => { }) });
+      const sync = () => { btn.classList.toggle("muted", a.paused); btn.classList.toggle("playing", !a.paused) };
+      a.addEventListener("play", sync); a.addEventListener("pause", sync);
+      btn.onclick = () => { a.paused ? a.play().catch(() => { }) : a.pause() };
+      return {
+        start() { btn.classList.add("show"); seek(); a.play().catch(() => { }); sync() }
+      };
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      render(); gallery(); countdown(); calendar(); reveal(); const stop = snow(); const bgm = music();
+      $("#top").onclick = () => scrollTo({ top: 0, behavior: "smooth" });
+      /* Open button: start music (needs a tap), snow moment, then reveal the invitation from the top */
+      $("#openBtn").onclick = () => {
+        const cv = $("#cover"); cv.classList.add("opening");
+        bgm.start();
+        toTop();
+        setTimeout(() => { toTop(); cv.classList.add("gone"); document.body.classList.remove("locked"); toTop(); requestAnimationFrame(toTop) }, 1800);
+        setTimeout(() => { toTop(); stop(); cv.style.display = "none" }, 2900)
+      };
+    });
+  </script>
+</body>
+
+</html>
