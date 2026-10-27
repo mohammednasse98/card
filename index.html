@@ -4,21 +4,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mohamed &amp; Nihal</title>
+
+  <!-- ===== Link preview (WhatsApp / Facebook / Telegram / X) =====
+       غيّر YOUR-SITE.com باللينك الحقيقي بتاع الدعوة بعد ما ترفعها،
+       وارفع og-image.png في نفس المكان جنب الدعوة. لازم اللينك كامل يبدأ بـ https:// -->
   <meta name="description" content="We invite you to the wedding of Mohamed &amp; Nihal | Thursday, December 31, 2026">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Mohamed &amp; Nihal">
-  <meta property="og:description"
-    content="We invite you to the wedding of Mohamed &amp; Nihal | Thursday, December 31, 2026">
+  <meta property="og:description" content="We invite you to the wedding of Mohamed &amp; Nihal | Thursday, December 31, 2026">
   <meta property="og:url" content="https://YOUR-SITE.com/">
   <meta property="og:image" content="https://YOUR-SITE.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Mohamed &amp; Nihal">
-  <meta name="twitter:description"
-    content="We invite you to the wedding of Mohamed &amp; Nihal | Thursday, December 31, 2026">
+  <meta name="twitter:description" content="We invite you to the wedding of Mohamed &amp; Nihal | Thursday, December 31, 2026">
   <meta name="twitter:image" content="https://YOUR-SITE.com/og-image.png">
-  <title>Mohamed &amp; Nihal</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@400;600&family=Lora:ital@0;1&display=swap"
     rel="stylesheet">
@@ -89,17 +91,9 @@
     }
 
     @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(27, 63, 115, .5)
-      }
-
-      70% {
-        box-shadow: 0 0 0 14px rgba(27, 63, 115, 0)
-      }
-
-      100% {
-        box-shadow: 0 0 0 0 rgba(27, 63, 115, 0)
-      }
+      0% { box-shadow: 0 0 0 0 rgba(27, 63, 115, .5) }
+      70% { box-shadow: 0 0 0 14px rgba(27, 63, 115, 0) }
+      100% { box-shadow: 0 0 0 0 rgba(27, 63, 115, 0) }
     }
 
     body {
@@ -737,9 +731,6 @@
       }
     }
   </style>
-  <meta property="og:url" content="https://nihal-mohamed.netlify.app/">
-  <meta property="og:image" content="https://nihal-mohamed.netlify.app/og-image.png">
-  <meta name="twitter:image" content="https://nihal-mohamed.netlify.app/og-image.png">
 </head>
 
 <body class="locked">
@@ -895,14 +886,8 @@
 
   <audio id="bgm" preload="auto" playsinline></audio>
   <button id="musicBtn" type="button" aria-label="Toggle music">
-    <svg class="on" viewBox="0 0 24 24">
-      <path
-        d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z" />
-    </svg>
-    <svg class="off" viewBox="0 0 24 24">
-      <path
-        d="M16.5 12A4.5 4.5 0 0 0 14 8v2.2l2.5 2.5V12zM19 12a7 7 0 0 1-.9 3.4l1.5 1.5A9 9 0 0 0 21 12a9 9 0 0 0-7-8.8v2.1A7 7 0 0 1 19 12zM4.3 3 3 4.3 7.7 9H3v6h4l5 5v-6.7l4.2 4.2c-.7.5-1.400.9-2.200 1.100v2.100a9 9 0 0 0 3.600-1.800l2 2 1.300-1.300L4.300 3zM12 4 9.900 6.100 12 8.200V4z" />
-    </svg>
+    <svg class="on" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>
+    <svg class="off" viewBox="0 0 24 24"><path d="M16.5 12A4.5 4.5 0 0 0 14 8v2.2l2.5 2.5V12zM19 12a7 7 0 0 1-.9 3.4l1.5 1.5A9 9 0 0 0 21 12a9 9 0 0 0-7-8.8v2.1A7 7 0 0 1 19 12zM4.3 3 3 4.3 7.7 9H3v6h4l5 5v-6.7l4.2 4.2c-.7.5-1.400.9-2.200 1.100v2.100a9 9 0 0 0 3.600-1.800l2 2 1.300-1.300L4.300 3zM12 4 9.900 6.100 12 8.200V4z"/></svg>
   </button>
 
   <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer"><button id="lbX"
@@ -913,7 +898,7 @@
     const CONFIG = {
       /* الأغنية: حط ملف الأغنية جنب ملف الـ html باسم song.mp3 (أو غيّر الاسم هنا)
          start / end = الثواني اللي هتشتغل بينهم، ولما توصل لـ end ترجع تعيد من start */
-      music: { src: "nihal.mp3", start: 0, end: 45 },
+      music: { src: "song.mp3", start: 0, end: 45 },
       groom: "Mohamed", bride: "Nihal",
       date: "2026-12-31T17:00:00",            // wedding date & time (local)
       welcome: "7:00 PM", reception: "6:00 PM",
@@ -921,7 +906,7 @@
       mapsUrl: "https://maps.app.goo.gl/aXxhozkmiKeE976R9?g_st=iw" + encodeURIComponent("Cairo, Egypt"),
       mapsEmbed: "https://maps.google.com/maps?q=" + encodeURIComponent("قاعة فيرمونت ريو، نادي ضباط القوات المسلحة، طلخا، الدقهلية") + "&output=embed",
       photos: [ // 3 photos: big one first. Put real paths in src; empty = placeholder
-        { src: "n1.jpeg", alt: "Mohamed and Nihal together" }, { src: "n2.jpeg", alt: "A happy moment" }, { src: "n3.jpeg", alt: "Our story" }],
+        { src: "", alt: "Mohamed and Nihal together" }, { src: "", alt: "A happy moment" }, { src: "", alt: "Our story" }],
     };
     /* ===================================================== */
     const $ = (s, r = document) => r.querySelector(s), D = new Date(CONFIG.date);
